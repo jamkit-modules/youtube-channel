@@ -24,6 +24,18 @@ var module = (function() {
         }
     }
 
+    function _get_object(id, handler) {
+        const object = view.object(id);
+
+        if (!object) {
+            timeout(0.1, function() {
+                _get_object(id, handler);
+            });
+        } else {
+            handler(object);
+        }
+    }
+
     return {
         initialize: function(id, channel_id) {
             var web_prefix = id.replace(".", "_");
@@ -99,8 +111,10 @@ var module = (function() {
                 }
 
                 if (location === 0 && feed.is_web_loaded()) {
-                    feed.reset();
-                    view.object(_id + ".web").action("home");
+                    _get_object(_id + ".web", function(object) {
+                        feed.reset();
+                        object(_id + ".web").action("home");
+                    });
 
                     _web_loaded = false;
                 }

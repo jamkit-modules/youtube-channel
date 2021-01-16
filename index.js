@@ -2,8 +2,8 @@ var module = (function() {
     const webjs = require("webjs-helper"),
           feed  = require("webjs-feed");
 
-    var _id = "", _channel_id = "", _handlers = [];
-    var _dir_path = "";
+    var _id = "", _dir_path = "", _handlers = [];
+    var _channel_id = "";
     var _web_loaded = false;
 
     function _on_web_loaded(data) {
@@ -47,13 +47,15 @@ var module = (function() {
 
             webjs.initialize(id + ".web", "__$_bridge");
             view.object(id).action("load", { 
-                "filename":dir_path + "/web.sbml",
-                "web-id":id, 
-                "web-prefix":web_prefix,
-                "channel-id":channel_id
+                "filename": dir_path + "/web.sbml",
+                "dir-path": dir_path,
+                "web-id": id, 
+                "web-prefix": web_prefix,
+                "channel-id": channel_id
             });
 
-            _id = id, _channel_id = channel_id, _dir_path = dir_path;
+            _id = id, _dir_path = dir_path;
+            _channel_id = channel_id;
 
             return this;
         },

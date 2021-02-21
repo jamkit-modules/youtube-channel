@@ -46,14 +46,12 @@ var module = (function() {
             }
 
             webjs.initialize(id + ".web", "__$_bridge");
-            _get_object(id, function(object) {
-                object.action("load", { 
-                    "filename": dir_path + "/web.sbml",
-                    "dir-path": dir_path,
-                    "web-id": id, 
-                    "web-prefix": web_prefix,
-                    "channel-id": channel_id
-                });
+            view.object(id).action("load", { 
+                "filename": dir_path + "/web.sbml",
+                "dir-path": dir_path,
+                "web-id": id, 
+                "web-prefix": web_prefix,
+                "channel-id": channel_id
             });
 
             _id = id, _dir_path = dir_path;
@@ -117,7 +115,7 @@ var module = (function() {
                 if (location === 0 && feed.is_web_loaded()) {
                     _get_object(_id + ".web", function(object) {
                         feed.reset();
-                        object(_id + ".web").action("home");
+                        object.action("home");
                     });
 
                     _web_loaded = false;

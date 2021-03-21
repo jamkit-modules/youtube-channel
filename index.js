@@ -7,8 +7,6 @@ var module = (function() {
     var _web_loaded = false;
 
     function _on_web_loaded(data) {
-        console.log("get_videos")
-
         if (data["url"].startsWith("https://m.youtube.com/channel")) {
             webjs.import(_dir_path + "/youtube.js");
 
